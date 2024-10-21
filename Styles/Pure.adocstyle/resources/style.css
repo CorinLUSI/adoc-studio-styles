@@ -1,0 +1,409 @@
+/*
+	This is the Pure css stylesheet for adoc Studio.
+	It is based on the Base.css (see info.json) and it may can be also used
+	as the basis for other factory stylesheets in adoc Studio.
+
+	This css file works as a supplement to the base styles.
+
+	It contains several changes to the base style:
+
+	- it redefines all fonts and colors
+	- it adds new icons for the notes
+	- other minor changes (see the comments)
+
+	Author: Corin Ludwig-Simkin for LINIENLAND
+	Version: 1.0 from September 24, 2024
+	License: Distributed under the permissive MIT license
+*/
+
+@import url("https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css");
+
+@font-face {
+    font-family: "Remix Icons";
+    src: url("fonts/remixicon.ttf");
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/InterVariable.ttf");
+}
+
+:root {
+    font-family: Inter, sans-serif;
+    font-feature-settings: "liga" 1, "calt" 1; /* fix for Chrome */
+
+    --ads-headline-font: "Inter";
+    --ads-body-font: "Inter";
+    --ads-quote-font: "Inter";
+    --ads-monospaced-font: "Inter";
+    --ads-admonitions-font: "Remix Icons";
+    --ads-toc-font: var(--ads-body-font);
+
+    --ads-color: Black; /* base color for all text */
+    --ads-color-dark: #f1f1f1; /* dark variant of the base color */
+    --ads-background-color: #ffffff; /* base color for the background */
+    --ads-background-color-dark: #1e1e1e; /* dark variant of the background color */
+
+    --ads-headline-color: Black; /* base color for all headline */
+    --ads-headline-color-dark: Silver; /* dark variant for the headlines */
+    --ads-headline-block-color: Black; /* headline color for any blocks */
+    --ads-headline-block-color-dark: Silver; /* dark variant for the block headlines */
+    --ads-headline-small-color: Black; /* color for small headlines */
+    --ads-headline-small-color-dark: Silver; /* dark variant for the small headlines */
+
+    --ads-mark-background-color: #ffff00; /* Text marker with the same in dark mode */
+
+    --ads-a-color: Navy; /* all kind of links */
+    --ads-a-color-dark: CornflowerBlue; /* dark variant of the links */
+    --ads-a-hover-color: CornflowerBlue; /* hover variant of the links */
+    --ads-a-hover-color-dark: Navy; /* dark variant of links hover */
+
+    --ads-single-border-color: #dddddd; /* Mainly for single lines */
+    --ads-border-color: rgb(
+        0 0 0 / 0.6
+    ); /* Light variant for some transparent borders */
+    --ads-border-color-dark: rgb(
+        255 255 255 / 0.1
+    ); /* Dark variant for all borders */
+    --ads-details-color: rgb(
+        0 0 0 / 0.85
+    ); /* Some borders needs to be less transparent */
+    --ads-details-color-dark: rgb(
+        255 255 255 / 0.85
+    ); /* dark variant of these borders */
+
+    /* Colors for tables */
+
+    --ads-table-background-color: #ffffff;
+    --ads-table-background-color-dark: #212121;
+    --ads-table-head-background-color: #f7f8f7;
+    --ads-table-head-background-color-dark: #323232;
+    --ads-table-alternate-background-color: #f8f8f7;
+    --ads-table-alternate-background-color-dark: #f8f8f7;
+    --ads-table-stripes-background-color: #f7f8f7;
+    --ads-table-stripes-background-color-dark: #323232;
+    --ads-linenotable-background-color: none;
+    --ads-linenotable-background-color-dark: none;
+
+    /* Colors for various kinds of blocks */
+
+    --ads-code-color: Black;
+    --ads-code-color-dark: White;
+    --ads-quote-color: Black;
+    --ads-quote-color-dark: White;
+    --ads-pre-color: green;
+    --ads-pre-color-dark: #666;
+    --ads-pre-background-color: #ededed;
+    --ads-pre-background-color-dark: #7f7f7f;
+    --ads-exampleblock-background-color: #555;
+    --ads-exampleblock-background-color-dark: #121212;
+    --ads-sidebar-background-color: #f3f3f2;
+    --ads-sidebar-background-color-dark: #3f3f3f;
+    --ads-listingblock-background-color: var(--ads-pre-background-color);
+    --ads-listingblock-background-color-dark: #7f7f7f;
+    --ads-listingblock-output-background-color: rgb(0 0 0 / 0.9);
+    --ads-listingblock-output-background-color-dark: #7f7f7f;
+
+    /* Colors for the UI elements */
+
+    --ads-kbd-background-color: #f7f7f7;
+    --ads-kbd-background-color-dark: #bababa;
+    --ads-kbd-color: rgb(0 0 0 / 0.8);
+    --ads-kbd-color-dark: rgb(0 0 0 / 0.8);
+    --ads-keyseq-color: rgb(51 51 51 / 0.8);
+    --ads-keyseq-color-dark: rgb(255 255 255 / 0.1);
+    --ads-menu-color: #000;
+    --ads-menu-color-dark: #eee;
+
+    /* Colors for the Table of contents */
+
+    --ads-toc-background-color: #f8f8f7;
+    --ads-toc-background-color-dark: #323232;
+    --ads-toc2-background-color: #f8f8f7;
+    --ads-toc2-background-color-dark: #323232;
+
+    /* Colors for the Footer */
+
+    --ads-footer-background-color: rgb(0 0 0 / 0.8);
+    --ads-footer-background-color-dark: rgb(100 100 100 / 0.4);
+
+    /* Colors for Pretty Print */
+
+    --ads-prettyprint-background-color: #f7f7f8;
+    --ads-prettyprint-background-color-dark: #7f7f7f;
+    --ads-prettyprint-list-background-color: none;
+    --ads-prettyprint-list-background-color-dark: none;
+
+    /*  Admonitions: The background color is unused in the base style.
+		It is prepared for a style similar to Apple Calendar with dark/light colors */
+
+    --ads-admonitionblock-background-color: none;
+    --ads-admonitionblock-background-color-dark: none;
+    --ads-note-color: #1962d1;
+    --ads-note-border-color: #1962d1;
+    --ads-note-background-color: #f0f0f0;
+    --ads-tip-color: #ebd005;
+    --ads-tip-border-color: #ebd005;
+    --ads-tip-background-color: #e0f0ff;
+    --ads-warning-color: #fc9803;
+    --ads-warning-border-color: #fc9803;
+    --ads-warning-background-color: #ffe0f0;
+    --ads-caution-color: #cf2604;
+    --ads-caution-border-color: #cf2604;
+    --ads-caution-background-color: #fff0e0;
+    --ads-important-color: #800101;
+    --ads-important-border-color: #800101;
+    --ads-important-background-color: #ffe0e0;
+}
+
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: InterVariable, sans-serif;
+    }
+}
+
+h1,
+h2,
+p,
+td.content,
+span.alt,
+summary,
+p strong,
+td.content strong,
+div.footnote strong {
+    letter-spacing: 0; /* Letter spacing deactivates ligatures */
+}
+
+p {
+    line-height: 1.5;
+    font-size: 1.2em;
+}
+
+.paragraph.lead > p,
+#preamble > .sectionbody > [class="paragraph"]:first-of-type p {
+    font-size: 120%;
+    font-weight: 500;
+}
+
+#header .details {
+    border-bottom: none;
+    justify-content: center;
+}
+
+/* Add a grayscale filter over all images */
+
+/* Some fine-tuning of the headlines */
+#header h1 {
+    text-align: center;
+}
+
+h2,
+h3 {
+    margin-top: 1em;
+}
+
+#toctitle {
+    margin-left: 0;
+    font-weight: 600;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 900;
+}
+
+/* PARAGRAPHS */
+
+.paragraph p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+}
+
+p,
+blockquote,
+dt,
+td.content,
+td.hdlist1,
+span.alt,
+summary {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+}
+
+/* LINKS */
+
+.toc2 .sectlevel1 a {
+    color: black;
+}
+
+.toc2 .sectlevel1 a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.toc2 .sectlevel1 a:active,
+.toc2 .sectlevel1 a:visited {
+    color: black;
+    text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+    .toc2 .sectlevel1 a {
+        color: white;
+    }
+
+    .toc2 .sectlevel1 a:hover {
+        color: white;
+        text-decoration: underline;
+    }
+
+    .toc2 .sectlevel1 a:active,
+    .toc2 .sectlevel1 a:visited {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+/* EASY ADMONITIONS */
+
+.admonitionblock td.icon .icon-important::before {
+    font-family: var(--ads-admonitions-font);
+    content: "\f0cf";
+    font-size: 1em;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.admonitionblock td.icon .icon-caution::before {
+    font-family: var(--ads-admonitions-font);
+    content: "\ed3d";
+    font-size: 1em;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.admonitionblock td.icon .icon-warning::before {
+    font-family: var(--ads-admonitions-font);
+    content: "\ea21";
+    font-size: 1em;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.admonitionblock td.icon .icon-tip::before {
+    font-family: var(--ads-admonitions-font);
+    content: "\eea8";
+    font-size: 1em;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.admonitionblock td.icon .icon-note::before {
+    font-family: var(--ads-admonitions-font);
+    content: "\f19b";
+    font-size: 1em;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.admonitionblock td.icon [class^="fa icon-"]::before {
+    background-color: #efeeee;
+    color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+    .admonitionblock td.icon [class^="fa icon-"]::before {
+        background-color: #555;
+        color: #efeeee;
+    }
+}
+
+/* Set the admonition titel */
+.admonitionblock td.icon .title {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 0.5em;
+}
+
+/*** Standard PDF-Output in adoc Studio ***/
+
+@media vivliostyle {
+    h2 {
+        border-bottom: thin solid black;
+    }
+
+    h3,
+    h4 {
+        font-weight: 500;
+    }
+
+    #header > h1:first-child,
+    #header .details,
+    .paragraph.lead > p,
+    #preamble > .sectionbody > [class="paragraph"]:first-of-type p,
+    .tocbase {
+        text-indent: 0;
+    }
+
+    .paragraph p {
+        width: 100%;
+        text-indent: 2em; /* Indentation of the first line */
+        margin: 0;
+        text-align-last: none;
+        orphans: 3;
+        widows: 3;
+    }
+
+    .paragraph.lead > p,
+    #preamble > .sectionbody > [class="paragraph"]:first-of-type p {
+        font-size: 1.35em;
+        margin-bottom: 2.5em;
+    }
+
+    pre,
+    code {
+        hyphens: auto;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-all; /* no hypens are shown */
+    }
+
+    .admonitionblock {
+        border: 0.05em solid gray;
+        background-color: var(--ads-pre-background-color);
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+    }
+
+    .imageblock.left + .paragraph p {
+        text-indent: 0; /* No text indentation when images are left aligned */
+    }
+
+    td > p {
+        /* No text indentation in tables */
+        text-indent: 0;
+    }
+
+    ul > ol,
+    ul > li {
+        margin-top: 0.8em;
+    }
+
+    li > p {
+        text-indent: 0; /* No Indentation in lists */
+        line-height: 1;
+    }
+}
+
+/*** Videoblock ***/
+
+.videoblock {
+    display: flex;
+    justify-content: center;
+    background-color: #efeeee;
+    align-items: center;
+    padding: 2rem 0;
+}
